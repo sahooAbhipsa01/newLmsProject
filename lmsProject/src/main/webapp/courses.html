@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manage Courses</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h1>Manage Courses</h1>
+            <form action="course" method="post" class="login-form">
+                <div class="input-group">
+                    <label for="courseName">Course Name:</label>
+                    <input type="text" id="courseName" name="courseName" required>
+                </div>
+
+                <!-- Hidden input for action -->
+                <input type="hidden" id="action" name="action" value="create">
+
+                <button type="button" class="btn" onclick="setAction('Create')">Create</button>
+                <button type="button" class="btn" onclick="setAction('Update')">Update</button>
+                <button type="button" class="btn" onclick="setAction('Delete')">Delete</button>
+            </form>
+        </div>
+        <div class="right-content">
+            <img src="images/courses.jpg" alt="Courses Image">
+        </div>
+    </div>
+
+    <script>
+        // Function to set the action value before form submission
+        function setAction(action) {
+            document.getElementById('action').value = action;
+            document.querySelector('form').submit();
+        }
+    </script>
+</body>
+
+</html>

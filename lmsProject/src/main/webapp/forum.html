@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Forum</title>
+    <link rel="stylesheet" href="css/forum.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading-underline">Discussion Forum</h1>
+
+        <!-- Discussion Topics Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Discussion Topic</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Row -->
+                <tr>
+                    <td>General Questions</td>
+                    <td>
+                        <button class="join-discussion-btn">Join Discussion</button>
+                    </td>
+                </tr>
+                <!-- Add dynamically populated rows here -->
+            </tbody>
+        </table>
+
+        <!-- Post New Discussion -->
+        <h2 class="heading-underline">Post a New Discussion</h2>
+        <form action="postDiscussion" method="post">
+            <input 
+                type="text" 
+                name="discussionTopic" 
+                placeholder="Enter your discussion topic here" 
+                required>
+            <button type="submit">Post</button>
+        </form>
+    </div>
+</body>
+</html>

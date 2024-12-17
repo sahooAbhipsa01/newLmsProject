@@ -1,0 +1,157 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #326374;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    width: 90%;
+    margin: 5%;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Section */
+.left-section {
+    background-color: white;
+    padding: 20px;
+    border-bottom: 2px solid #ddd;
+    text-align: center;
+}
+
+.left-section h1 {
+    font-size: 28px;
+    color: #326374;
+}
+
+.left-section p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Right Section */
+.right-section {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+}
+
+/* Form Container */
+.form-container {
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.form-container h2 {
+    font-size: 22px;
+    color: #326374;
+    border-bottom: 2px solid #326374;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #326374;
+    color: white;
+    font-size: 16px;
+}
+
+td {
+    color: #333;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #2f788f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #1b4058;
+}
+
+/* Heading with underline */
+.heading-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.heading-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #326374;
+    bottom: 0;
+    left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        margin: 10px;
+    }
+
+    .left-section {
+        padding: 15px;
+    }
+
+    .right-section {
+        padding: 15px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}
