@@ -31,10 +31,10 @@ public class TrainerCourseServices {
 		    return false;
 		}
 		
-		// Get all courses for Trainer
-	    public List<Courses> getAllCoursesForTrainer() {
+		// Get all courses for a specific trainer
+	    public List<Courses> getAllCoursesForTrainer(int trainerId) {
 	        List<Courses> courses = new ArrayList<>();
-	        String query = "SELECT * FROM courses WHERE trainer_id = ?";
+	        String query = "SELECT course_id, name AS course_name, course_description FROM courses WHERE trainer_id = ?";
 
 	        try (Connection con = DBConnection.connectDB();
 	             PreparedStatement ps = con.prepareStatement(query)) {
@@ -45,7 +45,6 @@ public class TrainerCourseServices {
 	                Courses course = new Courses();
 	                course.setId(rs.getInt("course_id"));
 	                course.setName(rs.getString("course_name"));
-	                course.setTrainerName(rs.getString("trainer_name"));
 	                course.setCourseDescription(rs.getString("course_description"));
 	                courses.add(course);
 	            }

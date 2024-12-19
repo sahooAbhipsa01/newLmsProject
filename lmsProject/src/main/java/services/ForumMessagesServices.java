@@ -25,7 +25,7 @@ public class ForumMessagesServices {
             while (rs.next()) {
                 ForumMessage message = new ForumMessage();
                 message.setId(rs.getInt("forumMessages_id"));
-                message.setUserId(rs.getInt("user_name"));
+                message.setUserName(rs.getString("user_name"));
                 message.setMessage(rs.getString("message"));
                 message.setCreatedAt(rs.getString("created_at"));
                 messages.add(message);
@@ -49,6 +49,24 @@ public class ForumMessagesServices {
              e.printStackTrace();
          }
          return false;
+    }
+    
+    public String getTopicNameById(int topicId) {
+    	String query = "Select message from forum_messages where forumMessages_id = ?";
+
+        try (Connection con = DBConnection.connectDB();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, topicId);
+           
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+            	return rs.getString("message");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return " NA ";
     	
     }
 }

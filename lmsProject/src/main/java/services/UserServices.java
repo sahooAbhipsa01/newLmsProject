@@ -79,24 +79,5 @@ public class UserServices {
     	return user;
     	
     }
-    public static void main(String[] args) {
-        UserServices userServices = new UserServices();
-
-        // Create a sample user for testing
-        User testUser = new User();
-        testUser.setName("John Doe");
-        testUser.setEmail("john.doe@example.com");
-        testUser.setGender("M");
-        testUser.setPassword("password123");
-        testUser.setRole("student");
-
-        // Test the registerUser method
-        boolean isRegistered = userServices.registerUser(testUser);
-        if (isRegistered) {
-            System.out.println("User registration successful!");
-        } else {
-            System.out.println("User registration failed.");
-        }
-        
-    }
+    
 }
