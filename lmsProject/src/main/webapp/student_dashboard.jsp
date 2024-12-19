@@ -1,3 +1,4 @@
+<%@page import="models.ForumMessage"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
@@ -9,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard|Student</title>
+<title>Dashboard | Student</title>
 <link rel="stylesheet" href="css/studentstyles.css">
 </head>
 <body>
@@ -42,7 +43,7 @@
 						<%
 						List<Courses> enrolledCourses = (List<Courses>) session.getAttribute("enrolledCoursesList");
 						if (enrolledCourses != null) {
-						for (Courses course : enrolledCourses) {
+							for (Courses course : enrolledCourses) {
 						%>
 						<tr>
 							<td><%=course.getName()%></td>
@@ -52,11 +53,10 @@
 						</tr>
 						<%
 						}
-						}else	{
-							
+						} else {
 						%>
 						<tr>
-						<td colspan="4">No enrolled courses found.</td>
+							<td colspan="4">No enrolled courses found.</td>
 						</tr>
 						<%
 						}
@@ -96,14 +96,14 @@
 								<%
 								if (isEnrolled) {
 								%>
-								<button disabled>Enrolled</button> <%
+								<button class="submit-btn" disabled>Enrolled</button> <%
  } else {
  %>
 								<form action="enroll" method="post">
 									<input type="hidden" name="courseId" value="<%=cr.getId()%>">
-									<input type="hidden" name="studentId" value="${sessionScope.loggedInUserId }">
-									
-									<input type="submit" value="Enroll">
+									<input type="hidden" name="studentId"
+										value="${sessionScope.loggedInUserId }"> <input
+										type="submit" value="Enroll" class="submit-btn">
 								</form> <%
  }
  %>
@@ -126,13 +126,13 @@
 					</thead>
 					<tbody id="grades">
 						<%
-						List<Grade> gradesList = (List<Grade>) session.getAttribute("gradesList");
+						List<Grade> gradesList = (List<Grade>) session.getAttribute("studentGradeList");
 						for (Grade grade : gradesList) {
-							System.out.println(grade);
+							
 						%>
 						<tr>
 							<td><%=grade.getCourseName()%></td>
-							<td><%=grade.getGrade()%></td>
+							<td><%=grade.getCurrentGrade()%></td>
 						</tr>
 						<%
 						}
@@ -148,39 +148,41 @@
 					<thead>
 						<tr>
 							<th>Discussion Topic</th>
+							<th>Started By</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody id="discussionForum">
 						<!-- Example Row -->
+						<%
+						List<ForumMessage> allMessages = (List<ForumMessage>) session.getAttribute("allForumMessages");
+						
+						for(ForumMessage fm : allMessages){
+						%>
 						<tr>
-							<td>General Questions</td>
+							<td> <%=fm.getMessage() %> </td>
+							<td> <%=fm.getUserName() %> </td>
 							<td>
-								<button>Join Discussion</button>
-								
+								<button onclick="window.location.href='forum?topic_id=<%=fm.getId() %>'">Join Discussion</button>
+
 							</td>
 						</tr>
-
-						<!-- Input Row -->
-						<tr>
-						<form action="forum"  method="post">
-							<td colspan="2">
-							<input type="text" name="discussionTopic"
-							placeholder="Enter your question here"
-							style="width:80%;
-							height=100px;
-							padding=10px;
-							margin:10px 0;border:2px solid #ccc;
-							border-radius:5px;"required>
-							<input type="hidden" name="userId" value="${sessionScope.loggedInUserId }">
-							
-							<button type="submit">Post</button>
-							
-							</td>
-							</form>
-							</tr>
+						<%} %>
 					</tbody>
 				</table>
+				<!-- Input Row -->
+
+				<form method="post" action="forum">
+					<input type="text" name="discussionTopic"
+						placeholder="Enter your question here"
+						style="width: 80%; height: 25px; padding: 10px; margin: 10px 0; border: 2px solid #ccc; border-radius: 5px;"
+						required> 
+						<input type="hidden" name="userId" value="${sessionScope.loggedInUserId}"> 
+						<input class="submit-btn" type="submit" value="Post">
+				</form>
+
+
+
 			</div>
 		</div>
 	</div>
