@@ -2,9 +2,10 @@ package controller;
 
 import services.CourseServices;
 import services.EnrollmentServices;
-import services.GradeServices;
+import services.ForumMessagesServices;
 import services.UserServices;
 import models.Courses;
+import models.ForumMessage;
 import models.Grade;
 import models.User;
 
@@ -23,8 +24,8 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UserServices userServices = new UserServices();
     private final CourseServices courseServices=new CourseServices();
-    private final GradeServices gradeServices = new GradeServices();
     private final EnrollmentServices enrollmentServices = new EnrollmentServices();
+    private final ForumMessagesServices forumMessagesServices = new ForumMessagesServices(); 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +53,7 @@ public class LoginServlet extends HttpServlet {
             User user = userServices.getUserById(currentUserId);
 
 
-            // Set session attributes for the logged-in user
+         // Set session attributes for the logged-in user
             HttpSession session = request.getSession();
             
          // Fetch enrolled courses for the student
@@ -69,16 +70,21 @@ public class LoginServlet extends HttpServlet {
             
          // Fetch grades for the student if the role is "student"
             if ("student".equalsIgnoreCase(user.getRole())) {
-                List<Grade> gradesList = gradeServices.getGradesByStudentId(user.getUserId());
-                session.setAttribute("gradesList", gradesList);
+            	List<Grade> gradesList = enrollmentServices.getGradeByStudentId(currentUserId);
+                session.setAttribute("studentGradeList", gradesList);                
             }
             
+         // Fetch all forum messages   
+            List<ForumMessage> allForumTopics = forumMessagesServices.getAllForumMessages();
+            session.setAttribute("allForumMessages", allForumTopics);
 
             // Check the user role
             if ("student".equalsIgnoreCase(user.getRole())) {
                 System.out.println("Redirecting to student_dashboard.jsp");
                 response.sendRedirect("student_dashboard.jsp");
             } else if ("teacher".equalsIgnoreCase(user.getRole())) {
+            	List<Grade> gradesList = enrollmentServices.getEnrollmentsByTeacherId(currentUserId);
+                session.setAttribute("gradesList", gradesList);
                 System.out.println("Redirecting to trainer_dashboard.jsp");
                 response.sendRedirect("trainer_dashboard.jsp");
             } else {

@@ -8,27 +8,27 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/createCourse")
-public class TrainerController extends HttpServlet {
-    
-	private static final long serialVersionUID = 1L;
-	private TrainerCourseServices trainerCourseServices = new TrainerCourseServices();
+public class TrainerServlet extends HttpServlet {
 
-   
+    private static final long serialVersionUID = 1L;
+    private TrainerCourseServices trainerCourseServices = new TrainerCourseServices();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Object trainerIdObj = session.getAttribute("trainerId");
 
-        // Check if trainerId is present in the session
+        // Debugging: Print trainerId to check if it's correctly retrieved
+        System.out.println("Trainer ID in session: " + trainerIdObj);
+
         if (trainerIdObj == null) {
-            // Redirect to login page or show error message
-            response.sendRedirect("index.html"); // Adjust the page as needed
+            // Redirect to login page if trainerId is not in session
+            response.sendRedirect("index.html");
             return;
         }
 
-        // If trainerId is present, continue with course creation
+        // Parse trainerId and create new course
         int trainerId = Integer.parseInt(trainerIdObj.toString());
-
         String courseName = request.getParameter("courseName");
         String courseDescription = request.getParameter("courseDescription");
 
@@ -45,5 +45,4 @@ public class TrainerController extends HttpServlet {
             response.sendRedirect("trainer_dashboard.jsp?message=Error Creating Course");
         }
     }
-
 }

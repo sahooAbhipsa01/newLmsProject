@@ -39,7 +39,7 @@ public class CourseServlet extends HttpServlet {
                 // Update an existing course
                 int courseId = Integer.parseInt(request.getParameter("courseId"));
                 int trainerId = Integer.parseInt(request.getParameter("trainerId"));
-                Courses course = new Courses(courseId, courseName, trainerId);
+                Courses course = new Courses(courseId, trainerId, courseName);
                 isSuccess = courseServices.updateCourse(course);
 
             } else if ("Delete".equalsIgnoreCase(action)) {
