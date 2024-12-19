@@ -19,7 +19,7 @@ public class DBQueries {
     public static final String getCourseId="select c.course_id , c.name,u.name as trainer_name from courses c join users u on c.trainer_id = u.user_id";
     public static final String updateCoursesByCousrseId = "UPDATE courses SET name = ? WHERE course_id = ?";
     public static final String deleteCourseById = "DELETE FROM courses WHERE course_id = ?";
-    public static final String insertCoursesWithDescription="INSERT INTO courses(course_name, trainer_id, course_description) VALUES (?, ?, ?)";
+    public static final String insertCoursesWithDescription="INSERT INTO courses(name, trainer_id, course_description) VALUES (?, ?, ?)";
     
     //Enrollment Queries
     public static final String insertEnrollments = "INSERT INTO enrollments (student_id, course_id) VALUES (?, ?)";
@@ -29,9 +29,10 @@ public class DBQueries {
     
     //grade queries
     public static final String insertGrade = "INSERT INTO grades (student_id, course_id, grade) VALUES (?, ?, ?)";
-    public static final String update_grade = "UPDATE grades SET grade = ? WHERE id = ?";
-    public static final String getGradesByStudentId = "SELECT * FROM grades WHERE student_id = ?";
-    public static final String getGradesByCourseId = "SELECT * FROM grades WHERE course_id = ?";
+    public static final String UPDATE_GRADE = "UPDATE student_courses SET grade = ? WHERE student_id = ?";
+    public static final String getGradesByStudentId = "SELECT c.name AS course_name, g.grade FROM grades g JOIN courses c ON g.course_id = c.course_id WHERE g.student_id = ?";
+    
+    public static final String getGradesByCourseId="SELECT u.name AS student_name, g.grade FROM grades g JOIN users u ON g.student_id = u.user_id WHERE g.course_id = ?";
     
     //// Forum Queries
     public static final String insertForumMessgaes = "INSERT INTO forum_messages (user_id, message) VALUES (?, ?)";
