@@ -4,7 +4,15 @@ public class ForumMessage {
 	private int id;
     private int userId;
     private String message;
-    private String  createdAt;
+    private String createdAt;
+    private String userName;
+    
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public ForumMessage(int id, int userId, String message, String createdAt) {
 		super();
 		this.id = id;
@@ -13,10 +21,12 @@ public class ForumMessage {
 		this.createdAt = createdAt;
 	}
 	public ForumMessage() {}
+	
+	
 	@Override
 	public String toString() {
 		return "ForumMessage [id=" + id + ", userId=" + userId + ", message=" + message + ", createdAt=" + createdAt
-				+ "]";
+				+ ", userName=" + userName + "]";
 	}
 	public int getId() {
 		return id;

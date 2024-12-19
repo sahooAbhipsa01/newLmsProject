@@ -1,52 +1,63 @@
 package models;
 
 public class Grade {
-	private int id;
-    private int studentId;
-    private int courseId;
-    private String courseName;
-    public String getCourseName() {
+	
+	private int enrollementId;
+	private String studentName;
+	private String courseName;
+	private String currentGrade;
+	
+	public int getEnrollementId() {
+		return enrollementId;
+	}
+
+	public void setEnrollementId(int enrollementId) {
+		this.enrollementId = enrollementId;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "Grade [studentName=" + studentName + ", courseName=" + courseName + ", currentGrade=" + currentGrade
+				+ "]";
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public String getCourseName() {
 		return courseName;
 	}
+
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	private String grade;
-	public int getId() {
-		return id;
+
+	public String getCurrentGrade() {
+		return currentGrade;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setCurrentGrade(String currentGrade) {
+		this.currentGrade = currentGrade;
 	}
-	public int getStudentId() {
-		return studentId;
-	}
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
-	}
-	public int getCourseId() {
-		return courseId;
-	}
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
-	}
-	public String getGrade() {
-		return grade;
-	}
-	@Override
-	public String toString() {
-		return "Grade [id=" + id + ", studentId=" + studentId + ", courseId=" + courseId + ", grade=" + grade + "]";
-	}
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-	public Grade(int id, int studentId, int courseId, String grade) {
+
+	public Grade() {
 		super();
-		this.id = id;
-		this.studentId = studentId;
-		this.courseId = courseId;
-		this.grade = grade;
 	}
-	public Grade() {}
+
+	public Grade(String studentName, String courseName, String currentGrade) {
+		super();
+		this.studentName = studentName;
+		this.courseName = courseName;
+		this.currentGrade = currentGrade;
+	}
+	
+	
 
 }
